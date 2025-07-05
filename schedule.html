@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حجز موعد</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>حجز موعد</h1>
+  <section id="slots"></section>
+  <form id="booking-form" hidden>
+    <div id="questions-container"></div>
+    <button type="submit">إرسال</button>
+  </form>
+  <div id="confirmation" hidden>تم الحجز بنجاح</div>
+
+  <script type="module">
+    import { initBooking } from './booking.js';
+    initBooking();
+  </script>
+</body>
+</html>

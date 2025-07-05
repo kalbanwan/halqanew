@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <h1>لوحة التحكم</h1>
+    <button id="logout">تسجيل الخروج</button>
+  </header>
+  <nav>
+    <button data-tab="users">المستخدمون</button>
+    <button data-tab="slots">المواعيد المتاحة</button>
+    <button data-tab="questions">الأسئلة</button>
+    <button data-tab="appointments">الحجوزات</button>
+  </nav>
+  <section id="users" class="tab-content"></section>
+  <section id="slots" class="tab-content" hidden></section>
+  <section id="questions" class="tab-content" hidden></section>
+  <section id="appointments" class="tab-content" hidden></section>
+
+  <script type="module">
+    import { requireAuth, logout } from '../auth.js';
+    import { initAdmin } from '../admin.js';
+
+    requireAuth(() => {
+      initAdmin();
+    });
+
+    document.getElementById('logout').addEventListener('click', async () => {
+      await logout();
+      window.location.href = '/login.html';
+    });
+
+    document.querySelectorAll('nav button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        document.querySelectorAll('.tab-content').forEach(sec => sec.hidden = true);
+        document.getElementById(tab).hidden = false;
+      });
+    });
+  </script>
+</body>
+</html>
